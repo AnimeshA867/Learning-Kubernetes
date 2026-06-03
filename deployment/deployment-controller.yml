@@ -25,6 +25,12 @@ spec:
             port: nodejs-port
           initialDelaySeconds: 5
           timeoutSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: nodejs-port
+          initialDelaySeconds: 5
+          timeoutSeconds: 30
       nodeSelector:
         name: node1
       
