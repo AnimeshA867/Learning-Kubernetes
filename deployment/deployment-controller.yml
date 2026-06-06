@@ -19,6 +19,11 @@ spec:
         ports:
         - name: nodejs-port
           containerPort: 3000
+        volumeMounts:
+        - name: db-secret-volume
+          mountPath: /etc/creds
+          readOnly: true
+     
         livenessProbe:
           httpGet:
             path: /
@@ -29,9 +34,13 @@ spec:
           httpGet:
             path: /
             port: nodejs-port
-          initialDelaySeconds: 5
+          initialDelaySeconds: 6
           timeoutSeconds: 30
       nodeSelector:
         name: node1
+      volumes:
+      - name: db-secret-volume
+        secret:
+          secretName: db-secret
       
           
